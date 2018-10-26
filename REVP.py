@@ -6,31 +6,26 @@ def REVP(n,s):
         restriction site is defined as a reverse palindrome
         reverse complement is identical to forward read
         output is position and length of each restriction site found'''
-        
+        '''input : seqName, n and DNA seq string, s 
+        will locate restriction sites of seq size 4-14 in a given seq
+        restriction site is defined as a reverse palindrome
+        reverse complement is identical to forward read
+        output is position and length of each restriction site found'''
+
         seqLength=len(s)
-        palindromeSet=set()
-        palindromeList=[]      
-       
-        for nucStretch in range(0,seqLength+1):
-                for endSite in range(nucStretch+4,nucStretch+13):
-                                
-                        forwardRead=s[nucStretch:endSite]
-                        reverseRead=REVC(forwardRead)
-                            
-                        if len(forwardRead)>=4 and len(reverseRead)>=4:
-                                    
-                                if forwardRead in reverseRead:
-                                        palindromeSet.add(str(nucStretch+1)+'%'+str(len(forwardRead)))
+        palindromeList=list()
+        forward=s
+        for i in range (4,13):
+                for nucStretch in range(0,seqLength-i+1):
+                        forwardRead=forward[nucStretch:nucStretch+i]
+                        
+                        if forwardRead== REVC(forwardRead):
 
+                                palindromeList.append([nucStretch+1,i])
 
-        for item in palindromeSet:
-                item=item.split('%')
-                palindromeList.append([int(item[0]),int(item[1])])
-                                      
-                
-        for item in sorted(palindromeList):
-                print(*item,sep='\t')
-
+        for item in palindromeList:
+                print(*item)
+        
 def fileOpen(f):
         '''input is an opened file,
         will read each file and separate ROSALIND seqs

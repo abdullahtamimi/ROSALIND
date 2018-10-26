@@ -12,12 +12,9 @@ def PERM(n):
         permList=permutations(numWord)
 
         for item in permList:
-                print(*item)
-        #look at it as shuffling indices in a list
+                print(*item)        
         
-        
-       
-
+    
 def factorial(n):
         totalNum=1
         if n>1:
@@ -25,6 +22,7 @@ def factorial(n):
                         totalNum*=num
         print(totalNum)
 
+        
 n=6
 PERM(n)
 
